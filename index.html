@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSU</title>
+
+    <style type="text/css">
+        /* style.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-image: url('msss.jpeg'); /* Replace with your background image path */
+    background-size: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <form class="login-form" id="login">
+            <h2 style="font-size: 12px">INTELLIGENT TUTORING SYSTEM</h2>
+            <input type="email" id="email" name="email" placeholder="Enter your Reg Number" required>
+
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+            <button type="button" onclick="submitForm()">Login</button>
+            <br>
+            <a href="register.html" style="font-size: 10px">If not registered ,Click here</a>
+            <a href="http://localhost/ITS/admin/" style="font-size: 10px">Authenticate as Admin</a>
+            
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="./assets/sbelement.js"></script>
+    <script src="./assets/sweetalert.js"></script>
+    <script src="./assets/datatables.js"></script>
+    <script type="text/javascript">
+        // script.js
+
+function submitForm() {
+    var formdata = new FormData();
+formdata.append('email',document.getElementById('email').value);
+  formdata.append('password',document.getElementById('password').value);
+  var xhr = new XMLHttpRequest();
+    xhr.open('POST',"http://localhost/nasheBackend/public/auth", true);
+    //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    xhr.onreadystatechange = function(){
+        console.log(xhr.readyState);
+        console.log(xhr.status);
+        if(xhr.status === 200 && xhr.readyState === 4){
+            var response = JSON.parse(xhr.responseText);
+            console.log(response.data);
+            if(response.data === "failed"){
+              var incorrectCredentialsAlert = '<div style="background-color:#f2dede;padding: 15px;border: 1px solid #d9534f; border-radius: 4px;color: #d9534f;width: 100%;"  id = "myAlert" class="alert alert-danger" role="alert">Incorrect Credentials</div>'
+              $('#login').prepend(incorrectCredentialsAlert);
+              $('#login').on('click', function(){
+                  $('#myAlert').remove();
+              });
+            }
+            else{
+            sessionStorage.setItem("adminData", JSON.stringify(response.data));
+            console.log(response.data)
+            window.location.href="dashboard.html";
+              // window.location = "dashboard.html";
+            }
+        }
+        else if(xhr.readyState === 4){
+              var incorrect = '<div style="background-color:#f2dede;padding: 15px;border: 1px solid #d9534f; border-radius: 4px;color: #d9534f;width: 100%;"  id = "myAlert" class="alert alert-danger" role="alert">Incorrect Credentials</div>'
+              $('#login').prepend(incorrect);
+              $('#login').on('click', function(){
+                  $('#myAlert').remove();
+
+              });
+
+        }
+        
+
+    }
+    xhr.send(formdata);
+    }
+
+    </script>
+</body>
+</html>

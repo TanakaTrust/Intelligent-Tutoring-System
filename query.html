@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <title>Student Query Portal</title>
+        <link href="styles.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="assets/js/lib/jquery.js"></script>
+</head>
+<body>
+
+<body class="sb-nav-fixed" >
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="back-ground:blue !improtant">
+            <a class="navbar-brand" href="dashboard.html" style="font-size: 12px;"><img src="msss.jpeg" style="width: 30px;font-size: 10px;">INTELLIGENT TUTORING SYSTEM</a>
+            
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                <div class="input-group">
+                    
+                    
+                </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ml-auto ml-md-0">
+                <li class="nav-item dropdown">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#">Admin</a>
+                        <a class="dropdown-item" href="#">Activity Log</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="index.html">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">QA</div>
+                            <a class="nav-link" href="queries.html" >
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Logged Queries
+                            </a>
+
+                         
+                        </div>
+                    </div>
+                  <!--   <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        <span id="loggin_ass">
+                            
+                        </span>
+                    </div> -->
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        
+                            <h1 class="mt-4">Log in Query Or Question</h1>
+                            <form >
+                    <input type="hidden" class="form-control" id="id" name="Product Name" placeholder="Enter Product Name" required="">
+
+                     <div class="row">
+                         
+
+                          <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="unit_price">Query or  Question Description</label>
+                                <textarea type="text" class="form-control" id="description" name="Description" placeholder="Description" required="" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    
+                    <div class="row">
+
+                        <div class="col-md-12" align="right">
+                            <hr>
+                           <div class="btj mt-auto" style="">
+                                <input type="button" name="save" class="btn btn-primary" value="Log Issue" onclick="Query()">
+                       
+                    </div> 
+                        </div>
+                        
+                    </div>
+                    
+                </form>
+                                            </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; MSU</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+<script src="assets/js/lib/sbelement.js"></script>
+<script src="assets/js/lib/sweetalert.js"></script>
+
+<script>
+ function Query() {
+    var formdata = new FormData();
+    var storedArray = JSON.parse(sessionStorage.getItem("adminData"));
+formdata.append('question', document.getElementById("description").value);
+formdata.append('student_id',storedArray.fullname);
+
+
+
+  var xhr = new XMLHttpRequest();
+    xhr.open('POST',"http://localhost/nasheBackend/public/query", true);
+    //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    xhr.onreadystatechange = function(){
+        console.log(xhr.readyState);
+        console.log(xhr.status);
+        if(xhr.status === 200 && xhr.readyState === 4){
+            var response = JSON.parse(xhr.responseText);
+            console.log(response.data);
+            if(response.data === "failed"){
+                      swal(
+  'Failed!',
+  'Failed to Send Query',
+  'error'
+);
+            }
+            else{
+                      swal(
+  'Sucess!',
+  'Successfully Send Query',
+  'success'
+).then(function() {
+   window.location.href="query.html";
+});
+            }
+        }
+        else if(xhr.readyState === 4){
+                      swal(
+  'Failed!',
+  'Failed to Send Query',
+  'error'
+);
+
+        }
+        
+
+    }
+    xhr.send(formdata);
+    }
+
+</script>
+</body>
+</html>

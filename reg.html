@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Tracing</title>
+
+    <style type="text/css">
+        /* style.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-image: url('img/lean.jpg'); /* Replace with your background image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <form class="login-form" id="login">
+            <h2 style="font-size: 12px">STEM STUDY GUIDE RECOMMENDER</h2>
+            <input type="text" id="fullname" name="email" placeholder="Enter your fullname" required>
+            <input type="text" id="gender" name="gender" placeholder="Enter your Gender" required>
+            <input type="text" id="age" name="age" placeholder="Enter your Age" required>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+            <button type="button" onclick="submitForm()">Register</button>
+            <br>
+            <a href="register.html" style="font-size: 10px">If registered ,Login</a>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="./assets/sbelement.js"></script>
+    <script src="./assets/sweetalert.js"></script>
+    <script src="./assets/datatables.js"></script>
+    <script type="text/javascript">
+        // script.js
+
+function submitForm() {
+    function AdminLogin() {
+var formdata = new FormData();
+formdata.append('fullname',document.getElementById('fullname').value);
+formdata.append('email',document.getElementById('email').value);
+formdata.append('age',document.getElementById('age').value);
+formdata.append('gender',document.getElementById('gender').value);
+  formdata.append('password',document.getElementById('password').value);
+  var xhr = new XMLHttpRequest();
+    xhr.open('POST',"http://localhost:90/nasheBackend/public/student", true);
+
+    xhr.onreadystatechange = function(){
+        if(xhr.status === 200 && xhr.readyState === 4){
+            var response = JSON.parse(xhr.responseText);
+            console.log(response.data);
+            if(response.data === "failed"){
+        swal(
+  'Failed!',
+  'Failed to create Student!!',
+  'error'
+).then(function() {
+   window.location.href="register.html";
+});
+            }
+            else{
+        swal(
+  'Success!',
+  'Student successfully created',
+  'success'
+).then(function() {
+   window.location.href="index.html";
+});              
+            }
+        }
+        else {
+
+          if (xhr.readyState === 4) {
+        swal(
+  'Failed!',
+  'Failed to create Student!!',
+  'error'
+).then(function() {
+   window.location.href="register.html";
+});
+              }
+
+        }
+        
+
+    }
+    xhr.send(formdata);
+}
+    </script>
+</body>
+</html>

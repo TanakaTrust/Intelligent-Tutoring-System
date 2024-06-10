@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Councils Admin</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+<link href="assets/css/sty.css" rel="stylesheet">
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.5.0
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <script src="assets/js/main.js"></script>
+  <script src="js/lib/jquery.js"></script>
+  <script src="js/lib/jquery.min.js"></script>
+  <script src="js/lib/jquery.slim.min.js"></script>
+  <script src="assets/js/lib/core.js"></script>
+    <script src="assets/js/lib/jquery.js"></script>
+    <script src="assets/js/lib/sbelement.js"></script>
+    <script src="assets/js/lib/sweetalert.js"></script>
+    <script src="assets/js/lib/datatable.js"></script>
+  <script src="assets/controllers/baseURL.js"></script>
+  <script src="assets/controllers/marshal.js"></script>
+
+</head>
+
+<body >
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <span class="d-none d-lg-block" style="color: #161499">Certificate Verification</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+        
+
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <span id="name_admin" class="d-none d-md-block dropdown-toggle ps-2"></span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="index.html">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #080d4d">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+                <div class="card-body" id="received1">
+                    <div>
+                     <img src="img/profile.png" style="width: 85px;height: 85px;align-content: center;"/>
+                   </div>
+                   <hr>
+                  <a id="marshal_fullname" style="color: white;">Liberty Mashonganyika
+                    <script type="text/javascript">
+                         var storedArray = JSON.parse(sessionStorage.getItem("adminData"));
+      document.getElementById("marshal_fullname").innerHTML =storedArray.fullname;
+                    </script></a>
+                  <hr>
+                  <a id="marshal_email" style="color: white;">libertymashonganyika@gmail.com
+                                      <script type="text/javascript">
+                         var storedArray = JSON.parse(sessionStorage.getItem("adminData"));
+      document.getElementById("marshal_email").innerHTML =storedArray.email;
+                    </script></a>
+                  <hr>
+                  <a id="marshal_number" style="color: white;">59-188107 Y 47
+                                                          <script type="text/javascript">
+                         var storedArray = JSON.parse(sessionStorage.getItem("adminData"));
+      document.getElementById("marshal_number").innerHTML =storedArray.phonenumber;
+                    </script>
+                  </a>
+                  <hr>
+                  <a id="marshal_rank" style="color: white;">CBD
+                   <script type="text/javascript">
+                         var storedArray = JSON.parse(sessionStorage.getItem("adminData"));
+      document.getElementById("marshal_rank").innerHTML =storedArray.address;
+                    </script></a>
+
+
+                </div>
+
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <section class="section dashboard">
+<div class="container">
+        <div class=" text-center mt-5 ">
+
+            <h1 >Verification Portal </h1>
+                
+            
+        </div>
+
+    
+    <div class="row ">
+      <div class="col-lg-7 mx-auto">
+        <div class="card mt-2 mx-auto p-4 bg-light">
+            <div class="card-body bg-light">
+       
+            <div class = "container">
+                             <form id="contact-form" role="form">
+
+            
+
+            <div class="controls">
+
+                        <div class="form-group">
+                            <input id="file" type="file"  class="form-control" placeholder="Please enter your Verification Token" required="required" data-error="Token is required.">
+                            
+                        </div>
+                  <br>
+                  <div style="  margin: auto;
+  width: 50%;
+  padding: 10px;">
+  <button type="button" class="btn btn-primary"  border="2px solid #0000FF" id="resolved" onclick="AdminLogin()" >Verify Certifcate</button>                    
+
+                  </div>      
+
+        </div>
+         </form>
+        </div>
+            </div>
+
+
+    </div>
+        <!-- /.8 -->
+
+    </div>
+    <!-- /.row-->
+
+</div>
+</div>
+
+    </section>
+
+  </main><!-- End #main -->
+
+
+
+<!--Add Marshal -->
+<div id="add_marshal" class="modal">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+    <div class="modal-header bg-primary y-jumbo">
+        <h4 class="modal-title  text-light">Add Marshal</h4>
+    </div>
+    <div class="modal-body" >
+
+           <div class="form-group">
+             <input type="text" class="form-control rounded-0" id="marshal_fname" placeholder="Enter Firstname" autocomplete="false" >
+             <br>
+             <input type="text" class="form-control rounded-0" id="marshal_lname" placeholder="Enter Lastname" autocomplete="false" >
+             <br>
+             <input type="text" class="form-control rounded-0" id="marshal_email" placeholder="Enter Email" autocomplete="false" >
+             <br>
+             <input type="text" class="form-control rounded-0" id="marshal_address" placeholder="Enter Address" autocomplete="false" >
+             <br>
+             <input type="text" class="form-control rounded-0" id="marshal_rank" placeholder="Enter Rank" autocomplete="false" >
+             <br>
+             <input type="text" class="form-control rounded-0" id="marshal_password" placeholder="Enter Password" autocomplete="false" >
+            </div>
+            
+        </p>
+           
+     <div class="modal-footer">
+
+      <button type="button" class="btn btn-primary"  border="2px solid #0000FF" id="resolved">Update</button>
+      <button type="button" class="btn btn-danger"  border="2px solid #0000FF" id="resolved">Delete</button>
+        <button type="button" class="btn btn-secondary"  border="2px solid #0000FF" id="resolved">Close</button>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+  function AdminLogin() {
+   var blobFile = document.getElementById('file').files[0];
+   var blob = new Blob([blobFile], { type: "file" });
+   console.log(blobFile)
+var formdata = new FormData();
+formdata.append('file',blob);
+  var xhr = new XMLHttpRequest();
+
+    xhr.open('POST',baseURL+"verify.php", true);
+    xhr.onreadystatechange = function(){
+        if(xhr.status === 200 && xhr.readyState === 4){
+
+
+        swal(
+  'Success!',
+  'File send successfully',
+  'success'
+).then(function() {
+   window.location.href="marshal.html";
+});
+              
+
+        }
+        else {
+
+          if (xhr.readyState === 4) {
+        swal(
+  'Failed!',
+  'Failed to send file!!!',
+  'error'
+).then(function() {
+   window.location.href="marshal.html";
+});
+              }
+
+        }
+        
+
+    }
+
+   
+    xhr.send(formdata);
+}
+</script>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+      <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/controllers/dashboard.js"></script>
+   <script src="js/demo/datatables-demo.js"></script>
+
+</body>
+
+</html>
