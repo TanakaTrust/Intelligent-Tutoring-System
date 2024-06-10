@@ -76,16 +76,14 @@ button:hover {
 
     <div class="login-container">
         <form class="login-form" id="login">
-            <h2 style="font-size: 12px">INTELLIGENT TUTORING SYSTEM</h2>
-            <input type="email" id="email" name="email" placeholder="Enter your Reg Number" required>
+            <h2 style="font-size: 12px">INTELLIGENT TUTORING SYSTEM ADMIN AUTH</h2>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
 
             <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
             <button type="button" onclick="submitForm()">Login</button>
             <br>
             <a href="register.html" style="font-size: 10px">If not registered ,Click here</a>
-            <a href="http://localhost/ITS/admin/" style="font-size: 10px">Authenticate as Admin</a>
-            
         </form>
     </div>
 
@@ -101,7 +99,7 @@ function submitForm() {
 formdata.append('email',document.getElementById('email').value);
   formdata.append('password',document.getElementById('password').value);
   var xhr = new XMLHttpRequest();
-    xhr.open('POST',"http://localhost/nasheBackend/public/auth", true);
+    xhr.open('POST',"http://localhost/nasheBackend/public/admin/auth", true);
     //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     xhr.onreadystatechange = function(){

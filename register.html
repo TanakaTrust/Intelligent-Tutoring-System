@@ -76,11 +76,11 @@ button:hover {
 
     <div class="login-container">
         <form class="login-form" id="login">
-            <h2 style="font-size: 12px">STUDENT RESGISTRATION</h2>
+            <h2 style="font-size: 12px">LECTURER REGISTRATION</h2>
             <input type="text" id="fullname" name="email" placeholder="Enter your fullname" required>
             <input type="text" id="gender" name="gender" placeholder="Enter your Gender" required>
             <input type="text" id="age" name="age" placeholder="Enter your Age" required>
-            <input type="email" id="email" name="email" placeholder="Enter your Reg Number" required>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
 
             <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
@@ -105,7 +105,7 @@ formdata.append('age',document.getElementById('age').value);
 formdata.append('gender',document.getElementById('gender').value);
   formdata.append('password',document.getElementById('password').value);
   var xhr = new XMLHttpRequest();
-    xhr.open('POST',"http://localhost/nasheBackend/public/student", true);
+    xhr.open('POST',"http://localhost/nasheBackend/public/admin/register", true);
 
     xhr.onreadystatechange = function(){
         if(xhr.status === 200 && xhr.readyState === 4){

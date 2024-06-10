@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSU</title>
+      <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="./assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="./assets/demo/demo.css" rel="stylesheet" />
+
+    <style type="text/css">
+        /* style.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-image: url('msss.jpeg'); /* Replace with your background image path */
+    background-size: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(255, 255, 255, 0.5); /* Faint white transparent color */
+}
+
+        .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    width: 750px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body onload="getCount(),Pass(),Fail()">
+
+    <div class="login-container">
+        <form class="login-form" id="login">
+            <h2 style="font-size: 12px"><b>EVALUATION RESULTS FOR STUDENTS</b></h2>
+            <a href="http://localhost/ITS/admin/dashboard.html" style="font-size: 10px">Back To Dashboard</a>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                            <p  style="font-size: 12px"><b>ALL: </b></p> <p id="all"><b><i>2</i></b></p>
+                            </div>
+                            <div class="col-md-4">
+                            <p  style="font-size: 12px"><b>PASSED: </b></p> <p id="pass"><b><i>1</i></b></p>
+                            </div>
+                           <div class="col-md-4">
+                            <p  style="font-size: 12px"><b>FAILED: </b></p> <p id="fail"><b><i>1</i></b></p>
+                            </div>
+                        </div>
+                        <br>
+
+        <table id="transaction-table">
+            <thead>
+                <tr>
+                    <th>FULLNAME</th>
+                    <th>STUDY HABIT</th>
+                    <th>RESULT</th>
+                </tr>
+            </thead>
+            <tbody id="transaction-body">
+            </tbody>
+        </table>
+       </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="assets/sbelement.js"></script>
+    <script src="assets/sweetalert.js"></script>
+    <script src="assets/datatables.js"></script>
+    <script type="text/javascript">
+        // script.js
+
+    
+        document.addEventListener('DOMContentLoaded', function() {
+    fetch('http://localhost/nasheBackend/public/studentss')
+        .then(response => response.json())
+        .then(responseData => {
+            const data = responseData.data;
+            const transactionBody = document.getElementById('transaction-body');
+            if (Array.isArray(data)) {
+                const suspiciousThreshold = 1000; // Define a threshold amount for suspicious transactions
+                data.forEach(transaction => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${transaction.fullname}</td>
+                        <td>${transaction.habit}</td>
+                        <td>${transaction.result}</td>
+                    `;
+                    transactionBody.appendChild(row);
+                });
+            } else {
+                console.error('Data returned from the API is not an array:', data);
+            }
+        })
+        .catch(error => console.error('Error fetching transaction data:', error));
+});
+        function getCount(){
+  var xhtp = new XMLHttpRequest();
+  xhtp.open('GET',"http://localhost/nasheBackend/public/count", true);
+    xhtp.onreadystatechange = function(){
+    if(xhtp.status === 200 && xhtp.readyState === 4){
+      var responses = JSON.parse(xhtp.responseText);
+      document.getElementById('all').innerHTML =responses.data;
+  }
+}
+xhtp.send();
+            
+ }
+         function Pass(){
+  var xhtp = new XMLHttpRequest();
+  xhtp.open('GET',"http://localhost/nasheBackend/public/pass", true);
+    xhtp.onreadystatechange = function(){
+    if(xhtp.status === 200 && xhtp.readyState === 4){
+      var responses = JSON.parse(xhtp.responseText);
+      document.getElementById('pass').innerHTML =responses.data;
+  }
+}
+xhtp.send();
+            
+ }
+          function Fail(){
+  var xhtp = new XMLHttpRequest();
+  xhtp.open('GET',"http://localhost/nasheBackend/public/fail", true);
+    xhtp.onreadystatechange = function(){
+    if(xhtp.status === 200 && xhtp.readyState === 4){
+      var responses = JSON.parse(xhtp.responseText);
+      document.getElementById('fail').innerHTML =responses.data;
+  }
+}
+xhtp.send();
+            
+ }
+    </script>
+</body>
+</html>
